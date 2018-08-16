@@ -49,7 +49,7 @@ public class UserSerializer implements UserDao {
 
 	@Override
 	public Users findByUsernameAndPassword(String userName, String password) {
-		// verify that what was passed in is not null
+		// Passed should not be null
 		if (userName == null || password == null) {
 			return null;
 		}
@@ -57,7 +57,7 @@ public class UserSerializer implements UserDao {
 				new FileInputStream("src/main/resources/users/" + userName + ".txt"))) {
 			
 			Users u = (Users) ois.readObject(); // retrieve the user if it can
-			// verify that the password matches
+			// Password = password verification
 			if (password.equals(u.getPassword())) {
 				return u;
 			} else {
@@ -77,11 +77,83 @@ public class UserSerializer implements UserDao {
 	@Override
 	public void updateUser(Users u) {
 		
+		if (u == null) {
+
+			return;
+
+		}
+
+		File f = new File("src/main/resources/user/" + u.getUserName() + ".txt");
+
+		try (ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream(f))) {
+
+			oos.writeObject(u);
+
+		} catch (FileNotFoundException e) {
+
+			e.printStackTrace();
+
+		} catch (IOException e) {
+
+			e.printStackTrace();
+
+		}
+		
 	}
 	
 	@Override
 	public void deleteUser(Users u) {
 		
+		if (u == null) {
+			
+			return;
+
+		}
+
+		File f = new File("src/main/resources/user/" + u.getUserName() + ".txt");
+
+		if (!f.exists()) {
+
+			return;
+
+		}
+
+		f.delete();
+		
 	}
 
+	@Override
+	public Users findByUsername(String username) {
+
+		if (username == null) {
+
+			return null;
+
+		}
+
+		try (ObjectInputStream ois = new ObjectInputStream(
+				// Find User
+				new FileInputStream("src/main/resources/user/" + username + ".txt"))) {
+			Users u = (Users) ois.readObject(); 
+			return u;
+
+		} catch (FileNotFoundException e) {
+			
+			System.out.println("File not found");
+
+		} catch (IOException e) {
+
+			System.out.println("Input/Output Exception");
+
+		} catch (ClassNotFoundException e) {
+
+			System.out.println("Class Not Found");
+
+		}
+
+		return null;
+
+	}
+	
+	
 }

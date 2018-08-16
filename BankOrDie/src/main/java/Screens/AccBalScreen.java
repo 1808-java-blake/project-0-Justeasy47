@@ -2,6 +2,7 @@ package Screens;
 
 import java.util.Scanner;
 
+import Beans.Users;
 import Daos.CurrentUser;
 import Daos.UserDao;
 
@@ -13,7 +14,7 @@ public class AccBalScreen implements Screen {
 
 	@Override
 	public Screen start() {
-		User currentUser = loggedInUser.getCurrent();
+		Users currentUser = loggedInUser.getCurrent();
 		System.out.println("Donation to the cause:" + currentUser.getBalance());
 
 		return this;

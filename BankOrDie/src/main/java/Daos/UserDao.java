@@ -12,7 +12,9 @@ public interface UserDao {
 	 */
 	void createUser(Users u);
 	Users findByUsernameAndPassword(String username, String password);
+	Users findByUsername(String username);
 	void updateUser(Users u);
 	void deleteUser(Users u);
+	
 
 }

@@ -20,16 +20,8 @@ public class RegisterUserScreen implements Screen {
 		u.setFirstName(scan.nextLine());
 		System.out.println("Enter last name");
 		u.setLastName(scan.nextLine());
-		System.out.println("Enter Age");
-		String age = scan.nextLine();
-		
-		try {
-			u.setAge(Integer.valueOf(age));
-			ud.createUser(u);
-			
-		} catch (NumberFormatException e) {
-			System.out.println("Invalid number");
-		}
+
+		ud.createUser(u);
 		
 		return new LoginScreen();
 	}

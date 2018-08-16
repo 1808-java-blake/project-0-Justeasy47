@@ -2,6 +2,7 @@ package Screens;
 
 import java.util.Scanner;
 
+import Beans.Users;
 import Daos.CurrentUser;
 import Daos.UserDao;
 
@@ -13,7 +14,7 @@ public class TransHistScreen implements Screen {
 
 	@Override
 	public Screen start() {
-		User currentUser = loggedInUser.getCurrent();
+		Users currentUser = loggedInUser.getCurrent();
 		System.out.println("View transaction history");
 		System.out.println("Deposit and Withdrawals: " + currentUser.getTransactionHistory().replaceAll("null,", ""));
 

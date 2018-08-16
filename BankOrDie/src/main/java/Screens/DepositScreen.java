@@ -2,6 +2,7 @@ package Screens;
 
 import java.util.Scanner;
 
+import Beans.Users;
 import Daos.CurrentUser;
 import Daos.UserDao;
 
@@ -14,10 +15,9 @@ public class DepositScreen implements Screen {
 	private UserDao ud = UserDao.currentUserDao;
 
 	@Override
-
 	public Screen start() {
-		User currentUser = loggedInUser.getCurrent();
-		double balance;
+		Users currentUser = loggedInUser.getCurrent();
+		int balance;
 
 		System.out.println("Enter your donation!");
 		System.out.println("Current Holdings: " + currentUser.getBalance());
@@ -25,7 +25,7 @@ public class DepositScreen implements Screen {
 		String depositAmount = scan.nextLine();
 		currentUser.setTransactionHistory(depositAmount);
 
-		System.out.println(balance = Double.valueOf(depositAmount) + currentUser.getBalance());
+		System.out.println(balance = Integer.valueOf(depositAmount) + currentUser.getBalance());
 
 		currentUser.setBalance(balance);
 
